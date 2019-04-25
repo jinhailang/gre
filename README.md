@@ -1,4 +1,4 @@
-[![Build Status](https://travis-ci.org/jinhailang/gre.svg?branch=master)](https://travis-ci.org/jinhailang/gre)
+[![Build Status](https://travis-ci.org/jinhailang/gre.svg?branch=master)](https://travis-ci.org/jinhailang/gre)[![codecov](https://codecov.io/gh/jinhailang/gre/branch/master/graph/badge.svg)](https://codecov.io/gh/jinhailang/gre)
 
 # Introduction
 
