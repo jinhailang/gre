@@ -1,4 +1,4 @@
-nguage: go
+language: go
 sudo: false
 go:
   - 1.10.x
@@ -11,4 +11,4 @@ script:
   - go test -coverprofile=coverage.txt -covermode=atomic
 
 after_success:
-  - bash <(curl -s https://codecov.io/bash) -t 78f92b9a-84d0-4728-b7d4-a45e8988a790
+  - bash <(curl -s https://codecov.io/bash)
