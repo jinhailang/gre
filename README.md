@@ -1,3 +1,5 @@
+[![codecov](https://codecov.io/gh/jinhailang/gre/branch/master/graph/badge.svg)](https://codecov.io/gh/jinhailang/gre)
+
 # Introduction
 
 `GRE`(go rule engine) 是使用 Go 语言实现的规则引擎。规则引擎接受输入规则表达式字符串，以及定义数据源，规则表达式解析是基于 Go 语法树（[go/ast](https://godoc.org/go/ast)）实现的，
