@@ -10,19 +10,28 @@
 ## Example
 
 ```
-dataSource := map[string]interface{}{
-	"it":100,
-	"str":"abc",
-	"ar":[]int{1,23,45},
-}
+package main
 
-expr := `(it>ar[2])&&(str=="abc")`
-rst, err := engine.Run(expr, dataSource)
-if err != nil {
-	fmt.Println("run expr error: %v", err)
-}
+import (
+    "fmt"
+    "github.com/jinhailang/gre"
+)
 
-fmt.Println("result: %v", rst)
+func main() {
+    dataSource := map[string]interface{}{
+	"it":  100,
+        "str": "abc",
+        "ar":  []int{1, 23, 45},
+    }
+
+    rst, err := engine.Run(`(it>ar[2])&&(str=="abc")`, dataSource)
+    if err != nil {
+    	fmt.Printf("run expr error: %v", err)
+    	return
+    }
+
+    fmt.Printf("result: %v", rst)
+}
 
 // result: true
 ```
