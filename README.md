@@ -2,10 +2,9 @@
 
 # Introduction
 
-`GRE`(go rule engine) 是使用 Go 语言实现的规则引擎。规则引擎接受输入规则表达式字符串，以及定义数据源，规则表达式解析是基于 Go 语法树（[go/ast](https://godoc.org/go/ast)）实现的，
-支持大部份的 Go 表达式使用。语法非常简洁，强大，提高了规则引擎的通用性，降低了规则学习与配置的时间成本。
+`GRE`(go rule engine) 是使用 Go 语言实现的规则引擎。规则引擎接受输入规则表达式字符串，以及定义数据源，规则表达式解析是基于 Go 抽象语法树（[go/ast](https://godoc.org/go/ast)）实现的，支持大部份的 Go 表达式作为规则表达式使用。表达式语法简洁，强大。基于表达式的实现方式，使 gre 规则引擎具有非常好的扩展性和通用性，并易于理解，使用户更易接受，快速配置正确的规则。
 
-目前，使用 Go 实现的规则引擎开源项目很少，且大多引擎只接受模板化的 JSON 配置，不太灵活，通用性较差，使用起来也比较复杂。GRE 期望能提供更简洁，强大的技术实现方案。
+目前，使用 Go 实现的规则引擎开源项目很少，且大多引擎只接受模板化的 JSON 配置，不太灵活，通用性较差，使用起来也比较复杂。gre 期望能提供更简洁，强大的实现方案。我在[规则引擎的实现](https://github.com/jinhailang/blog/issues/49)较详细的阐述了规则引擎的实现及基础原理。
 
 ## TDDO
 
@@ -40,6 +39,40 @@ func main() {
 // result: true
 ```
 
+大多数场景下，规则引擎将消息数据（一般是 Json 结构）当作规则主要数据源，代码一般如下：
+
+```
+package main
+
+import (
+    "fmt"
+    "github.com/jinhailang/gre"
+    "encoding/json"
+)
+
+func main() {
+    var dataSource := map[string]interface{}
+    var msg := `{"it":100,"str":"abc","ar":[1,23,45]}`
+
+    err := json.Unmarshal([]byte(msg), &dataSource)
+    if err != nil {
+        fmt.Printf("json error: %v", err)
+	return
+    }
+    
+    rst, err := engine.Run(`(it>ar[2])&&(str=="abc")`, dataSource)
+    if err != nil {
+    	fmt.Printf("run expr error: %v", err)
+    	return
+    }
+
+    fmt.Printf("result: %v", rst)
+}
+
+// result: true
+```
+
+**但是，这里有个坑，json.Unmarshal 默认会将 interface 类型变量对应的 json 数字字符串都解析成 float64 类型，而不是 int64。**我在[json.Unmarshal 奇怪的坑](https://github.com/jinhailang/blog/issues/50)作了具体说明以及解决方案。
 
 ## Test
 
