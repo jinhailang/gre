@@ -19,7 +19,29 @@ func init() {
 		"matchString":   fn(matchString),
 		"findAllString": fn(findAllString),
 		"newSlice":      fn(newSlice),
+		"isEmpty":       fn(isEmpty),
 	}
+}
+
+func isEmpty(args []ast.Expr, dataSource map[string]interface{}) (interface{}, error) {
+	err := fmt.Errorf("invalid args. args: %+v", args)
+	if len(args) != 1 {
+		return false, err
+	}
+
+	v, err := eval(args[0], dataSource)
+	if err != nil {
+		return false, err
+	}
+
+	switch v := v.(type) {
+	case nil:
+		return true, nil
+	case string:
+		return v == "", nil
+	}
+
+	return false, nil
 }
 
 func newSlice(args []ast.Expr, dataSource map[string]interface{}) (interface{}, error) {

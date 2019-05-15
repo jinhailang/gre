@@ -173,6 +173,18 @@ func TestEvalCallExpr(t *testing.T) {
 	if err != nil || rst.([]string)[1] != dataSource["str"] {
 		t.Fatalf("call error: %v, rst: %v", err, rst)
 	}
+
+	expr = createExpr(`isEmpty(str)`)
+	rst, err = evalCallExpr(expr.(*ast.CallExpr), dataSource)
+	if err != nil || rst.(bool) {
+		t.Fatalf("call error: %v, rst: %v", err, rst)
+	}
+
+	expr = createExpr(`isEmpty(itt)`)
+	rst, err = evalCallExpr(expr.(*ast.CallExpr), dataSource)
+	if err != nil || !rst.(bool) {
+		t.Fatalf("call error: %v, rst: %v", err, rst)
+	}
 }
 
 func TestRun(t *testing.T) {
