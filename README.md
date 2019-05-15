@@ -72,7 +72,7 @@ func main() {
 // result: true
 ```
 
-**但是，这里有个坑，json.Unmarshal 默认会将 interface 类型变量对应的 json 数字字符串都解析成 float64 类型，而不是 int64。**我在[json.Unmarshal 奇怪的坑](https://github.com/jinhailang/blog/issues/50)作了具体说明以及解决方案。
+**但是，这里有个坑，json.Unmarshal 默认会将 interface 类型变量对应的 json 数字字符串都解析成 float64 类型，而不是 int64**。我在[json.Unmarshal 奇怪的坑](https://github.com/jinhailang/blog/issues/50)作了具体说明以及解决方案。
 
 ## Test
 
