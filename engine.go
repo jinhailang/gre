@@ -36,7 +36,6 @@ func evalIdent(expr *ast.Ident, dataSource map[string]interface{}) interface{} {
 	if !ok {
 		return nil
 	}
-	
 	return value
 }
 
