@@ -35,9 +35,9 @@ func evalIdent(expr *ast.Ident, dataSource map[string]interface{}) interface{} {
 	value, ok := dataSource[key]
 	if !ok {
 		return nil
-	} else {
-		return value
 	}
+	
+	return value
 }
 
 func evalIndexExpr(expr *ast.IndexExpr, dataSource map[string]interface{}) (interface{}, error) {
